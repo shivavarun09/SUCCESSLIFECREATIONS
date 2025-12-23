@@ -144,9 +144,7 @@ export default function AppAppBar() {
                 <MenuItem component="a" href="#faq" onClick={toggleDrawer(false)}>
                   FAQ
                 </MenuItem>
-                <MenuItem component="a" href="#blog" onClick={toggleDrawer(false)}>
-                  Blog
-                </MenuItem>
+              
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button color="primary" variant="contained" component={Link} to="/sign-up" fullWidth>
