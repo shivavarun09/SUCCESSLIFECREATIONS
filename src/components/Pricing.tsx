@@ -19,6 +19,7 @@ const pricingPlans = [
   {
     id: 'starter',
     title: 'Starter Website',
+    subheader: 'Basic',
     price: '₹12,000',
     description: [
       'Single-page or basic multi-page website',
@@ -27,7 +28,7 @@ const pricingPlans = [
       'Contact form integration',
       'Deployment & basic support',
     ],
-    buttonText: 'Get details',
+    buttonText: 'Get Started',
     buttonVariant: 'outlined',
     buttonColor: 'primary',
     highlighted: false,
@@ -52,6 +53,7 @@ const pricingPlans = [
   {
     id: 'growth',
     title: 'Digital Growth Plan',
+    subheader: 'Digital',
     price: '₹18,000 / month',
     description: [
       'SEO & social media management',
@@ -60,7 +62,7 @@ const pricingPlans = [
       'Monthly performance reporting',
       'Ongoing support & consultation',
     ],
-    buttonText: 'Contact us',
+    buttonText: 'Get Started',
     buttonVariant: 'outlined',
     buttonColor: 'primary',
     highlighted: false,
