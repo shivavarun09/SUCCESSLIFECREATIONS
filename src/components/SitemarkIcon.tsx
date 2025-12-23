@@ -53,7 +53,7 @@ export default function SuccessLifeIcon() {
             textTransform: 'uppercase',
           }}
         >
-          Creations
+          Developers
         </text>
       </svg>
     </SvgIcon>
