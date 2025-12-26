@@ -9,6 +9,7 @@ import SignUp from './components/SignUp.tsx';
 import RefundPolicy from './components/RefundPolicy.tsx';
 import TermsAndConditions from './components/TermsAndConditions.tsx';
 import PrivacyPolicy from './components/PrivacyPolicy.tsx';
+import PaidDemoForm from './components/PaidDemoForm.tsx';
 ReactDOM.createRoot(document.querySelector("#root")!).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.querySelector("#root")!).render(
               <Route path='/refund-policy' element={<RefundPolicy/>} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/paid-demo-form" element={<PaidDemoForm />} />
 
 
             </Routes>

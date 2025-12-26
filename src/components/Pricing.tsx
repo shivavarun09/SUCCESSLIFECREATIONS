@@ -1,24 +1,27 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import {
+  Box,
+  Button,
+  Card,
+  Chip,
+  CardActions,
+  CardContent,
+  Container,
+  Divider,
+  Grid, // Note: MUI moved to Grid2 in newer versions
+  Typography
+} from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 /* ------------------------------------------------------------------ */
-/* PRICING DATA */
+/* UPDATED PRICING DATA WITH PATHS */
 /* ------------------------------------------------------------------ */
 const pricingPlans = [
   {
     id: 'starter',
     title: 'Starter Website',
+    path: '/contact', // Specific path
     subheader: 'Basic',
     price: '₹12,000',
     description: [
@@ -34,18 +37,19 @@ const pricingPlans = [
     highlighted: false,
   },
   {
-    id: 'business',
-    title: 'Business Website',
+    id: 'demo',
+    title: 'Book Demo',
+    path: '/paid-demo-form', // The link you requested
     subheader: 'Most Popular',
-    price: '₹25,000',
+    price: '₹999',
     description: [
-      '5–7 page custom website',
-      'Modern UI & responsive layout',
-      'SEO-friendly structure',
-      'Performance optimization',
-      '1 month free maintenance',
+      '30-minute paid demo session',
+      'Requirement discussion & guidance',
+      'Website & digital strategy overview',
+      'Clear pricing & roadmap explanation',
+      'Q&A and next steps clarity',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Pay & Book Demo',
     buttonVariant: 'contained',
     buttonColor: 'secondary',
     highlighted: true,
@@ -53,6 +57,7 @@ const pricingPlans = [
   {
     id: 'growth',
     title: 'Digital Growth Plan',
+    path: '/services/growth', // Another specific path
     subheader: 'Digital',
     price: '₹18,000 / month',
     description: [
@@ -69,11 +74,9 @@ const pricingPlans = [
   },
 ];
 
-
-/* ------------------------------------------------------------------ */
-/* COMPONENT */
-/* ------------------------------------------------------------------ */
 export default function Pricing() {
+  const navigate = useNavigate(); // 2. Initialize the hook
+
   return (
     <Container
       id="pricing"
@@ -86,29 +89,16 @@ export default function Pricing() {
         gap: { xs: 3, sm: 6 },
       }}
     >
-      {/* Heading */}
-      <Box
-        sx={{
-          width: { sm: '100%', md: '60%' },
-          textAlign: { sm: 'left', md: 'center' },
-        }}
-      >
-        <Typography variant="h4" gutterBottom>
-          Pricing Plans
-        </Typography>
+      <Box sx={{ width: { sm: '100%', md: '60%' }, textAlign: { sm: 'left', md: 'center' } }}>
+        <Typography variant="h4" gutterBottom>Pricing Plans</Typography>
         <Typography color="text.secondary">
-          Flexible photography and videography packages designed for weddings,
-          events, and family celebrations.
+          Flexible photography and videography packages designed for weddings, events, and family celebrations.
         </Typography>
       </Box>
 
-      {/* Pricing Cards */}
       <Grid container spacing={3} sx={{ justifyContent: 'center', width: '100%' }}>
         {pricingPlans.map((plan) => (
-          <Grid
-            key={plan.id}
-            size={{ xs: 12, sm: plan.highlighted ? 12 : 6, md: 4 }}
-          >
+          <Grid key={plan.id} size={{ xs: 12, sm: plan.highlighted ? 12 : 6, md: 4 }}>
             <Card
               sx={[
                 {
@@ -118,99 +108,45 @@ export default function Pricing() {
                   flexDirection: 'column',
                   gap: 3,
                   transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-6px)',
-                    boxShadow: 6,
-                  },
+                  '&:hover': { transform: 'translateY(-6px)', boxShadow: 6 },
                 },
-                plan.highlighted
-                  ? (theme) => ({
-                      border: 'none',
-                      background:
-                        'radial-gradient(circle at 50% 0%, hsl(220, 20%, 35%), hsl(220, 30%, 6%))',
-                      boxShadow: `0 10px 20px hsla(220, 20%, 42%, 0.3)`,
-                      '&:hover': {
-                        transform: 'translateY(-8px) scale(1.02)',
-                        boxShadow: `0 14px 28px hsla(220, 20%, 42%, 0.4)`,
-                      },
-                      ...theme.applyStyles('dark', {
-                        background:
-                          'radial-gradient(circle at 50% 0%, hsl(220, 20%, 20%), hsl(220, 30%, 16%))',
-                      }),
-                    })
-                  : {},
+                plan.highlighted ? (theme) => ({
+                    border: 'none',
+                    background: 'radial-gradient(circle at 50% 0%, hsl(220, 20%, 35%), hsl(220, 30%, 6%))',
+                    boxShadow: `0 10px 20px hsla(220, 20%, 42%, 0.3)`,
+                    ...theme.applyStyles('dark', {
+                      background: 'radial-gradient(circle at 50% 0%, hsl(220, 20%, 20%), hsl(220, 30%, 16%))',
+                    }),
+                  }) : {},
               ]}
             >
-              <CardContent>
-                {/* Title */}
-                <Box
-                  sx={[
-                    {
-                      mb: 1,
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    },
-                    plan.highlighted ? { color: 'grey.100' } : {},
-                  ]}
-                >
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Box sx={[{ mb: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }, plan.highlighted ? { color: 'grey.100' } : {}]}>
                   <Typography variant="h6">{plan.title}</Typography>
-                  {plan.subheader && (
-                    <Chip
-                      icon={<AutoAwesomeIcon />}
-                      label={plan.subheader}
-                      color="secondary"
-                    />
-                  )}
+                  {plan.subheader && <Chip icon={<AutoAwesomeIcon />} label={plan.subheader} color="secondary" />}
                 </Box>
 
-                {/* Price */}
-                <Box
-                  sx={[
-                    { display: 'flex', alignItems: 'baseline' },
-                    plan.highlighted ? { color: 'grey.50' } : {},
-                  ]}
-                >
+                <Box sx={[{ display: 'flex', alignItems: 'baseline' }, plan.highlighted ? { color: 'grey.50' } : {}]}>
                   <Typography variant="h3">{plan.price}</Typography>
                 </Box>
 
                 <Divider sx={{ my: 2 }} />
 
-                {/* Features */}
                 {plan.description.map((feature) => (
-                  <Box
-                    key={feature}
-                    sx={{
-                      py: 0.8,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.5,
-                    }}
-                  >
-                    <CheckCircleRoundedIcon
-                      sx={{
-                        width: 20,
-                        color: plan.highlighted
-                          ? 'primary.light'
-                          : 'primary.main',
-                      }}
-                    />
-                    <Typography
-                      variant="subtitle2"
-                      sx={plan.highlighted ? { color: 'grey.50' } : {}}
-                    >
-                      {feature}
-                    </Typography>
+                  <Box key={feature} sx={{ py: 0.8, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <CheckCircleRoundedIcon sx={{ width: 20, color: plan.highlighted ? 'primary.light' : 'primary.main' }} />
+                    <Typography variant="subtitle2" sx={plan.highlighted ? { color: 'grey.50' } : {}}>{feature}</Typography>
                   </Box>
                 ))}
               </CardContent>
 
-              {/* Action */}
               <CardActions>
+                {/* 3. Add onClick handler to navigate */}
                 <Button
                   fullWidth
                   variant={plan.buttonVariant as 'outlined' | 'contained'}
                   color={plan.buttonColor as 'primary' | 'secondary'}
+                  onClick={() => navigate(plan.path)}
                 >
                   {plan.buttonText}
                 </Button>
